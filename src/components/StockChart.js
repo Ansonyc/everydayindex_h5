@@ -21,7 +21,10 @@ const StockChart = () => {
   const fetchData = async () => {
     try {
       console.info('useCache', useCache);
-      const response = await axios.get(`/api/?symbol=510050&useCache=${useCache}`);
+      const baseUrl = process.env.NODE_ENV === 'production' 
+        ? 'https://everydayindex.onrender.com'
+        : '/api';
+      const response = await axios.get(`${baseUrl}/?symbol=510050&useCache=${useCache}`);
       // 处理日期格式
       const processedData = response.data.map(item => ({
         ...item,
