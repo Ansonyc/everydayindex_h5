@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "dependencies": {
     "react-dom": "^19.0.0",
