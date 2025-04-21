@@ -21,10 +21,19 @@ const StockChart = () => {
   const fetchData = async () => {
     try {
       console.info('useCache', useCache);
+      // 确保使用完全相同的域名
       const baseUrl = process.env.NODE_ENV === 'production' 
         ? 'https://everydayindex.onrender.com'
         : '/api';
-      const response = await axios.get(`${baseUrl}/?symbol=510050&useCache=${useCache}`);
+        
+      const response = await axios.get(`${baseUrl}/?symbol=510050&useCache=${useCache}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        withCredentials: false  // 对于跨域请求，先禁用 credentials
+      });
+      
       // 处理日期格式
       const processedData = response.data.map(item => ({
         ...item,
